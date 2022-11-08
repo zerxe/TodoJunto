@@ -1,45 +1,22 @@
-package todojunto;
+package todojunto.view;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
-import todojunto.model.Student;
-import todojunto.model.dao.StudentDao;
 
 /**
  *
  * @author Adolfo Morales Colmenares
  */
-public class FrmPrincipal extends javax.swing.JFrame {
-
-    private VistaTabla vtabla = null;
-    private Student alumno;
-    private StudentDao modeloalumno;
+public class JFrameStudent extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmPrincipal
      */
-    public FrmPrincipal() {
+    public JFrameStudent() {
         initComponents();
         this.setLocationRelativeTo(null);
 
-      //  alumno = new Student();
-        modeloalumno = new StudentDao();
-
-        modeloalumno.studentsQuery();
-        vtabla = new VistaTabla(modeloalumno.getRecords());
-        TablaAlumnos.setModel(vtabla);
-
-    }
-
-    public void updateView() {
-        modeloalumno.studentsQuery();
-
-        vtabla = new VistaTabla(modeloalumno.getRecords());
-        TablaAlumnos.setModel(vtabla);
     }
 
     /**
@@ -82,11 +59,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             }
         ));
-        TablaAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaAlumnosMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(TablaAlumnos);
 
         jLabel1.setText("Dni");
@@ -236,19 +208,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TablaAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAlumnosMouseClicked
-        Mostrar_datos(TablaAlumnos.getSelectedRow());
-    }//GEN-LAST:event_TablaAlumnosMouseClicked
-    private void Mostrar_datos(int fila) {
-
-        txtDni.setText(String.valueOf(TablaAlumnos.getValueAt(fila, 1)));
-        txtRegistro.setText(String.valueOf(TablaAlumnos.getValueAt(fila, 0)));
-        txtNombre.setText(String.valueOf(TablaAlumnos.getValueAt(fila, 2)));
-        txtApellido1.setText(String.valueOf(TablaAlumnos.getValueAt(fila, 3)));
-        txtApellido2.setText(String.valueOf(TablaAlumnos.getValueAt(fila, 4)));
-
-    }
-
     public JButton getBtnAltas() {
         return btnAltas;
     }
@@ -289,6 +248,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         return txtRegistro;
     }
 
+    public JTable getTablaAlumnos() {
+        return TablaAlumnos;
+    }
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaAlumnos;
@@ -314,46 +278,3 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 
-class VistaTabla extends AbstractTableModel {
-
-    ResultSet _rs;
-    ResultSetMetaData md; //contiene información sobre la estructura de un ResulSet,especialmente sobre sus nom campos
-    int _numColumnas;
-    int _numFilas;
-
-    public VistaTabla(ResultSet rs) {
-        this._rs = rs;
-        try {
-            md = rs.getMetaData();
-            _rs.last();
-            _numFilas = _rs.getRow();
-            _numColumnas = md.getColumnCount();
-
-        } catch (SQLException ex) {
-        }
-    }
-
-    @Override
-    public int getRowCount() {
-        return _numFilas;
-
-    }
-
-    @Override
-    public int getColumnCount() {
-        return _numColumnas;
-    }
-
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        try {
-            _rs.absolute(rowIndex + 1);
-            Object o = _rs.getObject(columnIndex + 1);
-            return o;
-        } catch (SQLException ex) {
-            return ex.toString();
-        }
-
-    }
-
-}

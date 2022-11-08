@@ -6,29 +6,29 @@ package todojunto.model;
  */
 public class Student {
 
-    private int registro;
+    private int id;
     private String dni;
-    private String nombre;
-    private String apellido1;
-    private String apellido2;
+    private String name;
+    private String surname1;
+    private String surname2;
 
     public Student() {
     }
 
-    public Student(int registro, String dni, String nombre, String apellido1, String apellido2) {
-        this.registro = registro;
+    public Student(int id, String dni, String name, String surname1, String surname2) {
+        this.id = id;
         this.dni = dni;
-        this.nombre = nombre;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
+        this.name = name;
+        this.surname1 = surname1;
+        this.surname2 = surname2;
     }
 
-    public int getRegistro() {
-        return registro;
+    public int getID() {
+        return id;
     }
 
-    public void setRegistro(int registro) {
-        this.registro = registro;
+    public void setID(int id) {
+        this.id = id;
     }
 
     public String getDni() {
@@ -39,28 +39,28 @@ public class Student {
         this.dni = dni;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getApellido1() {
-        return apellido1;
+    public String getSurname1() {
+        return surname1;
     }
 
-    public void setApellido1(String apellido1) {
-        this.apellido1 = apellido1;
+    public void setSurname1(String surname1) {
+        this.surname1 = surname1;
     }
 
-    public String getApellido2() {
-        return apellido2;
+    public String getSurname2() {
+        return surname2;
     }
 
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
+    public void setSurname2(String surname2) {
+        this.surname2 = surname2;
     }
 
 }

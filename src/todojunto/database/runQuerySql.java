@@ -27,7 +27,7 @@ public class runQuerySql {
         int status;
         try {
             Statement stmt = ConnectionDB.getConn().createStatement();
-            JOptionPane.showMessageDialog(null, sql);
+            //JOptionPane.showMessageDialog(null, sql);
             status = stmt.executeUpdate(sql);
         } catch (SQLException ex) {
             status = 0;
