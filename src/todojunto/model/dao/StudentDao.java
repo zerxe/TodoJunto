@@ -32,7 +32,6 @@ public class StudentDao {
             if (checkStudent(student)) {
                 String sql = "INSERT INTO `alumnos` (`registro`, `dni`, `nombre`, `apellido1`, `apellido2`) "
                         + "VALUES (NULL, '" + student.getDni() + "', '" + student.getName() + "', '" + student.getSurname1() + "', '" + student.getSurname2() + "');";
-                System.out.println(sql);
                 if (runQuery.executeQueryUpdate(sql) > 0) {
                     JOptionPane.showMessageDialog(null, "Alta Correcta");
                 } else {
@@ -44,21 +43,19 @@ public class StudentDao {
         } else {
             JOptionPane.showMessageDialog(null, "Ha habido un error en un campo del formulario");
         }
-
     }
 
     public void updateStudent(Student student) {
         if (student != null) {
             String sql = "update alumnos set dni='" + student.getDni() + "', nombre='" + student.getName() + "', "
-                + "apellido1='" + student.getSurname1() + "', apellido2='" + student.getSurname2() + "' "
-                + "where registro=" + student.getID();
-        if (runQuery.executeQueryUpdate(sql) > 0) {
-            JOptionPane.showMessageDialog(null, "Modificación Correcta");
-        } else {
-            JOptionPane.showMessageDialog(null, "Ha Habido un Error");
+                    + "apellido1='" + student.getSurname1() + "', apellido2='" + student.getSurname2() + "' "
+                    + "where registro=" + student.getID();
+            if (runQuery.executeQueryUpdate(sql) > 0) {
+                JOptionPane.showMessageDialog(null, "Modificación Correcta");
+            } else {
+                JOptionPane.showMessageDialog(null, "Ha Habido un Error");
+            }
         }
-        }
-        
     }
 
     public void deleteStudent(Student student) {
@@ -69,7 +66,7 @@ public class StudentDao {
             } else {
                 JOptionPane.showMessageDialog(null, "Ha Habido un Error");
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Alumno no seleccionado");
         }
     }
@@ -85,8 +82,7 @@ public class StudentDao {
             Student student = new Student();
             try {
                 student.setID(Integer.parseInt(jfStudent.getTxtRegistro().getText()));
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
             student.setDni(jfStudent.getTxtDni().getText());
             student.setName(jfStudent.getTxtNombre().getText());
             student.setSurname1(jfStudent.getTxtApellido1().getText());
@@ -94,7 +90,6 @@ public class StudentDao {
             return student;
         }
         return null;
-
     }
 
     public int getRowCount() {
@@ -133,13 +128,11 @@ public class StudentDao {
     }
 
     public void getSelectecRowViewTable(int fila, JFrameStudent jfs) {
-
         jfs.getTxtDni().setText(String.valueOf(jfs.getTablaAlumnos().getValueAt(fila, 1)));
         jfs.getTxtRegistro().setText(String.valueOf(jfs.getTablaAlumnos().getValueAt(fila, 0)));
         jfs.getTxtNombre().setText(String.valueOf(jfs.getTablaAlumnos().getValueAt(fila, 2)));
         jfs.getTxtApellido1().setText(String.valueOf(jfs.getTablaAlumnos().getValueAt(fila, 3)));
         jfs.getTxtApellido2().setText(String.valueOf(jfs.getTablaAlumnos().getValueAt(fila, 4)));
-
     }
 
     public boolean validateJFStudentFields(JFrameStudent jfStudent) {
@@ -167,5 +160,5 @@ public class StudentDao {
         }
         return false;
     }
-
+    
 }

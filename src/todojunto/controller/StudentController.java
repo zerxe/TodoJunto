@@ -22,17 +22,14 @@ public class StudentController  {
         student = new Student();
         jfStudent = new JFrameStudent();
         studentdao.studentsQuery();
-        
-        
+                
         studentViewTable = new StudentViewTable(studentdao);
         studentListener = new StudentListener(jfStudent,studentViewTable);
-        
-        
+                
         jfStudent.getTablaAlumnos().setModel(studentViewTable);
         jfStudent.getTxtRegistro().setEditable(false);
 
-        jfStudent.setVisible(true);
-        
+        jfStudent.setVisible(true);        
     }
 
 }
