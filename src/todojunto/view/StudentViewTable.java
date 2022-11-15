@@ -15,8 +15,7 @@ public class StudentViewTable extends AbstractTableModel {
     
     
     public StudentViewTable(StudentDao studentDao) {
-        this.studentDao = studentDao;
-        
+        this.studentDao = studentDao;        
     }
 
     @Override
@@ -31,8 +30,26 @@ public class StudentViewTable extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return studentDao.getStudentViewTable(rowIndex , columnIndex);
-
+        
+        if (columnIndex == 0){
+            student = studentDao.getStudent(rowIndex+1);
+          
+            return student.getID();
+        }else if (columnIndex == 1) {
+            return student.getDni();
+        }else if (columnIndex == 2) {
+            return student.getName();
+        }else if (columnIndex == 3) {
+            return student.getSurname1();
+        }else if (columnIndex == 4) {
+            return student.getSurname2();            
+        }
+        return null;
+        
+    }
+    public void refresh(){
+        studentDao.studentsQuery();
+        fireTableDataChanged();
     }
     
     

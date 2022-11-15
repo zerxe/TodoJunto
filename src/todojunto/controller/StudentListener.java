@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import todojunto.view.JFrameStudent;
 import todojunto.model.dao.StudentDao;
+import todojunto.view.StudentViewTable;
 
 /**
  *
@@ -14,9 +15,11 @@ public class StudentListener implements ActionListener, MouseListener {
     
     private JFrameStudent jfStudent;
     private StudentDao studentDao;
+    private StudentViewTable studentViewTable;
     
-    public StudentListener(JFrameStudent jfStudent) {
+    public StudentListener(JFrameStudent jfStudent, StudentViewTable studentViewTable) {
        this.jfStudent = jfStudent;
+       this.studentViewTable = studentViewTable;
        studentDao = new StudentDao();
        ActionListener();
        
@@ -35,7 +38,8 @@ public class StudentListener implements ActionListener, MouseListener {
             clearForm();
         }else if (control.equals(jfStudent.getBtnSalir())) {
             System.exit(0);
-        }
+        }        
+        studentViewTable.refresh();
         clearForm();
     }
     
